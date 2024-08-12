@@ -5,13 +5,23 @@ import * as S from './styles'
 import { RootReducer } from '../../store'
 
 const ListaDeTarefas = () => {
+  /*
+  1º useSelector ---> Acesso o estado global armazenado no redurcer tarefas
+  itens: Obtém a lista de tarefas do estado global.
+  */
   const { itens } = useSelector((state: RootReducer) => state.tarefas)
+  //2º useSelector ---> Acesso o estado global armazenado no redurcer filtro
   const { termo, criterio, valor } = useSelector(
     (state: RootReducer) => state.filtro
   )
 
   const filtraTarefa = () => {
+    //essa variável recebe todos os itens que foram obtidos do estado global pelo useSelector
     let tarefasFiltradas = itens
+    /*
+    - Primeiro, filtra pelo termo de busca (termo).
+    - Em seguida, aplica o critério de filtragem, se for prioridade ou status.
+    */
     if (termo !== undefined) {
       tarefasFiltradas = itens.filter(
         (itens) =>
